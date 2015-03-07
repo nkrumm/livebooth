@@ -1,16 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>PhotoBooth</title>
+	<style>
+	#photos {
+	    display: -webkit-box;  /* OLD - iOS 6-, Safari 3.1-6, BB7 */
+	    display: -ms-flexbox;  /* TWEENER - IE 10 */
+	    display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
+	    display: flex;         /* NEW, Spec - Firefox, Chrome, Opera */
+	    -webkit-flex-flow: row wrap;
+	    flex-flow: row wrap;
+	    justify-content: flex-start;
+	    align-content: flex-start;
+	    align-items: flex-start;
 
+	    background-color: gray;
+	}
+	.photodiv {
+		box-sizing: border-box;
+	    width: 33%;
+	    height: auto;
+	    padding: 1%;
+	}
+
+	div.photodiv > img {
+		width: 100%;
+		height: auto;
+	}
+	</style>
 <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
 <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
 <script>
   var socket = io();
   socket.on('new photo', function(msg){
   	console.log(msg);
-  	var img = $("<img />").attr('src', '/photos/' + msg).attr("width", 200)
+  	var img = $("<div>").attr("class", "photodiv").append(
+  				$("<img />").attr('src', '/photos/' + msg)
+  	);
     $('#photos').prepend(img);
   });
 </script>
 
+</head>
+<body>
 
 <div id="photos">
 
 </div>
+
+</body>
+</html>
