@@ -2,6 +2,7 @@ var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var chokidar = require('chokidar');
+var path = require('path')
 
 var args = require('commander')
 			  .version('0.0.1')
@@ -23,7 +24,7 @@ io.on('connection', function(socket){
 
 /* Directory watch code */
 
-var watcher = chokidar.watch(args.photoDir + "/*.jpg", {
+var watcher = chokidar.watch(path.join(args.photoDir, "/*.JPG"), {
   ignored: /[\/\\]\./, persistent: true
 }).on('add', function(path) {
 	console.log(path)
