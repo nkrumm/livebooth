@@ -5,11 +5,12 @@
   var socket = io();
   socket.on('new photo', function(msg){
   	console.log(msg);
-    $('#photos').prepend($('<li>').text(msg));
+  	var img = $("<img />").attr('src', '/photos/' + msg).attr("width", 200)
+    $('#photos').prepend(img);
   });
 </script>
 
 
-<ul id="photos">
+<div id="photos">
 
-</ul>
+</div>

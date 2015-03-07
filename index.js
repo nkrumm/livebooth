@@ -3,6 +3,7 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var chokidar = require('chokidar');
 var path = require('path')
+var processPhoto = require('./imagemanipulation.js')
 
 var args = require('commander')
 			  .version('0.0.1')
@@ -18,10 +19,10 @@ app.get('/', function(req, res) {
   res.sendFile(__dirname + '/index.html');
 });
 
-app.get(/photos\/[0-9]{1,}$/, function(req, res) {
+app.get(/photos\/IMG_[0-9]{4}.JPG$/, function(req, res) {
   // return the photo by ID here
   // this is the main way the app will receive photos live.
-  res.send(req.url)
+  res.sendFile(__dirname + "/thumbs/" + path.basename(req.url));
 });
 
 app.get('/photos/recent', function(req, res) {
@@ -38,13 +39,17 @@ io.on('connection', function(socket){
 
 /* Directory watch code */
 
+var sendImageToClient = function(msg){
+  io.emit('new photo', msg);
+}
+
 var watcher = chokidar.watch(path.join(args.photoDir, "/*.JPG"), {
-  ignored: /[\/\\]\./, persistent: true
-}).on('add', function(path) {
-	console.log(path)
-	// Todo: process photo (resize)
+  ignored: /[\/\\]\./, persistent: true, ignoreInitial: true
+}).on('add', function(in_path) {
+	console.log(in_path);
+	var thumb_path = processPhoto(in_path, sendImageToClient);
 	// Todo: add photo to database, and send ID via socket-io
-    io.emit('new photo', path);
+  
 });
 
 
