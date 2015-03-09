@@ -1,4 +1,5 @@
-var app = require('express')();
+var express = require("express");
+var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var chokidar = require('chokidar');
@@ -11,6 +12,7 @@ var args = require('commander')
 			  .parse(process.argv);
 
 require("./routes.js")(app, args)
+app.use(express.static("assets/"));
 
 io.on('connection', function(socket){
   console.log('Connected.');
