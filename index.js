@@ -10,7 +10,7 @@ var args = require('commander')
 			  .option('-d, --photo-dir [dir]', 'Directory of incoming photos to watch; default is ./', "./")
 			  .parse(process.argv);
 
-require("./routes.js")(app)
+require("./routes.js")(app, args)
 
 io.on('connection', function(socket){
   console.log('Connected.');

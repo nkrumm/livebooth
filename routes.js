@@ -1,5 +1,7 @@
 var path = require('path')
-module.exports = function(app){
+var fs = require('fs');
+
+module.exports = function(app, args){
 	/* Routing */
 
 	app.get('/', function(req, res) {
@@ -16,6 +18,10 @@ module.exports = function(app){
 	  // return the last N photos here
 	  // this route is to be hit initially on client app connect to load latest photos.
 	  // probably needs an ?offset=<int> parameter so that infinite scroll can be handled
-	  res.json({})
+	  fs.readdir(args.photoDir, function(err, files){
+	  	files = files.filter(function(f){return f.match(/.*JPG$/)})
+	  	files = files.reverse().slice(0,30)
+	  	res.json(files);
+	  })
 	});
 }
