@@ -1,7 +1,7 @@
 var lwip = require('lwip')
 var path = require('path')
 
-var processPhoto = function(input_path, callback){
+var processPhoto = function(callback, input_path){
 	var outpath = path.join("thumbs/", path.basename(input_path));
 
 	lwip.open(input_path, function(err, image){
@@ -14,4 +14,4 @@ var processPhoto = function(input_path, callback){
 	
 }
 
-module.exports = processPhoto
+module.exports.processPhoto = processPhoto
