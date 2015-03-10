@@ -18,7 +18,7 @@ module.exports = React.createClass({
 			console.log(msg);
 			var src = "/photos/" + msg;
 			this.setState({
-				photos: this.state.photos.concat([{src: src}])
+				photos: [{src: src}].concat(this.state.photos)
 			})
 		}.bind(this));
 
