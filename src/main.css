@@ -8,7 +8,7 @@
     justify-content: flex-start;
     align-content: flex-start;
     align-items: flex-start;
-
+    top: 50px;
     background-color: gray;
 }
 .photodiv {
@@ -23,3 +23,36 @@ div.photodiv > img {
 	height: auto;
 }
 
+#header {
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+    top: 0px;
+    height: 50px;
+    background-color: darkblue;
+    color: white;
+    font-size: 2em;
+    display: -webkit-box;  /* OLD - iOS 6-, Safari 3.1-6, BB7 */
+    display: -ms-flexbox;  /* TWEENER - IE 10 */
+    display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
+    display: flex;         /* NEW, Spec - Firefox, Chrome, Opera */
+    justify-content: space-between;
+    flex-flow: row wrap;
+}
+
+#header > .right-menu {
+    width: 50px;
+    padding-top: 10px;
+    padding-right: 20px;
+    text-align: right;
+}
+
+#header > .title {
+    padding: 10px;
+}
+
+#header > .left-menu {
+    width: 50px;
+    padding-top: 10px;
+    padding-left: 20px;
+}
