@@ -4,7 +4,7 @@ require("../main.css")
 var Thumbnail = require("./thumbnail.jsx")
 
 module.exports = React.createClass({
-    displayName: 'PhotoContainer',
+    displayName: 'PhotoIndex',
     render: function(){
     	var thumbs = this.state.photos.map(function(d, ix){
     		return <Thumbnail src={d.src} />

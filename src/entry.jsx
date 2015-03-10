@@ -1,8 +1,34 @@
+/** @jsx React.DOM */
 var React = require('react')
-var Container = require("./components/container.jsx")
+var PhotoIndex = require("./components/photoindex.jsx")
 var Header = require("./components/header.jsx")
+var HelpView = require("./components/helpview.jsx")
 
-React.render(
-		<div><Header /><Container /></div>,
-        document.getElementById('app')
+var Router = require('react-router'); // or var Router = ReactRouter; in browsers
+var DefaultRoute = Router.DefaultRoute;
+var Link = Router.Link;
+var Route = Router.Route;
+var RouteHandler = Router.RouteHandler;
+
+var App = React.createClass({
+	render: function () {
+    	return (
+    		<div>
+    			<Header />
+    			<RouteHandler />
+    		</div>
+    	)
+	}
+})
+
+
+var routes = (
+  <Route name='app' handler={App} path="/">
+    <Route name="index" handler={PhotoIndex} />    
+    <Route name="help" handler={HelpView} />
+  </Route>
 );
+
+Router.run(routes, function (Handler) {
+  React.render(<Handler/>, document.getElementById('app'));
+});
