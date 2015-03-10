@@ -21,6 +21,14 @@ module.exports = React.createClass({
 				photos: this.state.photos.concat([{src: src}])
 			})
 		}.bind(this));
+
+        $.get("/photos/recent").done(function(data){
+            var photos = data.map(function(d, ix){return {src: "/photos/" + d};})
+            console.log(photos)
+            this.setState({
+                photos: photos
+            })
+        }.bind(this));
     }, 
     getInitialState: function (){
     	return {

@@ -23,7 +23,7 @@ var sendImageToClient = function(msg){
 }
 
 var watcher = chokidar.watch(path.join(args.photoDir, "/*.JPG"), {
-  ignored: /[\/\\]\./, persistent: true, ignoreInitial: true
+  ignored: /[\/\\]\./, persistent: true, ignoreInitial: false
 }).on('add', function(in_path) {
 	console.log(in_path);
 	var thumb_path = photos.processPhoto(sendImageToClient, in_path);
