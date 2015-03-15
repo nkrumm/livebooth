@@ -7,7 +7,7 @@ module.exports = React.createClass({
     displayName: 'PhotoIndex',
     render: function(){
     	var thumbs = this.state.photos.map(function(d, ix){
-    		return <Thumbnail src={d.src} />
+    		return <Thumbnail id={d.id} />
     	})
         return (<div id="photos">{thumbs}</div>)
     },
@@ -23,8 +23,7 @@ module.exports = React.createClass({
 		}.bind(this));
 
         $.get("/photos/recent").done(function(data){
-            var photos = data.map(function(d, ix){return {src: "/photos/" + d};})
-            console.log(photos)
+            var photos = data.map(function(id, ix){return {id: id};})
             this.setState({
                 photos: photos
             })

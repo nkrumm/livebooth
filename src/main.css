@@ -1,3 +1,9 @@
+
+body {
+    background-color: gray;
+    margin-top: 50px;
+}
+
 #photos {
     display: -webkit-box;  /* OLD - iOS 6-, Safari 3.1-6, BB7 */
     display: -ms-flexbox;  /* TWEENER - IE 10 */
@@ -8,8 +14,7 @@
     justify-content: flex-start;
     align-content: flex-start;
     align-items: flex-start;
-    margin-top: 50px;
-    background-color: gray;
+
 }
 .photodiv {
 	box-sizing: border-box;
@@ -21,6 +26,22 @@
 div.photodiv > img {
 	width: 100%;
 	height: auto;
+}
+
+#photodetail {
+    display: -webkit-box;  /* OLD - iOS 6-, Safari 3.1-6, BB7 */
+    display: -ms-flexbox;  /* TWEENER - IE 10 */
+    display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
+    display: flex;         /* NEW, Spec - Firefox, Chrome, Opera */
+    -webkit-flex-flow: row nowrap;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+
+#photodetail > div {
+    padding-top: 20px;
 }
 
 #header {
