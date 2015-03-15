@@ -24,7 +24,7 @@ var App = React.createClass({
 
 var routes = (
   <Route name='app' handler={App} path="/">
-    <Route name="index" handler={PhotoIndex} />    
+    <DefaultRoute name="index" handler={PhotoIndex} />    
     <Route name="help" handler={HelpView} />
   </Route>
 );
