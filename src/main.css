@@ -52,7 +52,6 @@ div.photodiv > img {
 #photodetail .button {
     display: inline-block;
     box-sizing: border-box;
-    width: 50%;
     height: 100%;
     padding: 32px;
     font-size: 40px;
@@ -69,11 +68,19 @@ div.photodiv > img {
 
 #photodetail .backward {
     /*background-color: #ddd;*/
+    width: 40%;
+}
+
+#photodetail .share {
+    text-align: center;
+    /*background-color: #ddd;*/
+    width: 20%;
 }
 
 #photodetail .forward {
  /*   background-color: #ddd;*/
     text-align: right;
+    width: 40%;
 }
 
 #header {
