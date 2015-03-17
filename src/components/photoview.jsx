@@ -17,9 +17,11 @@ module.exports = React.createClass({
   		return (
 
   		<div id="photodetail">
-  			<div className="content"><img src={"/photo/" + this.getParams().id} /></div>	
-			<div className="button backward" onClick={this.handleBackward}>Back</div>
-			<div className="button forward" onClick={this.handleForward}>Forward</div>
+  			<div className="content"><img src={"/photo/" + this.getParams().id} /></div>
+  			<div className="footer">
+				<div className="button backward" onClick={this.handleBackward}>Back</div>
+				<div className="button forward" onClick={this.handleForward}>Forward</div>
+			</div>
   		</div>)
     },
 })

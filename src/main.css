@@ -32,21 +32,9 @@ div.photodiv > img {
 	height: auto;
 }
 
-#photodetail {
-    display: -webkit-box;  /* OLD - iOS 6-, Safari 3.1-6, BB7 */
-    display: -ms-flexbox;  /* TWEENER - IE 10 */
-    display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
-    display: flex;         /* NEW, Spec - Firefox, Chrome, Opera */
-    -webkit-flex-flow: row wrap;
-    flex-flow: row wrap;
-    justify-content: center;
-    margin: auto;
-}
-
 #photodetail .content {
-    max-height: 90vh;
+    max-height: 100vh;
     overflow: hidden;
-    flex: 1 100%;
     background-color: green;
 }
 
@@ -54,20 +42,37 @@ div.photodiv > img {
     width: 100%;
 }
 
+#photodetail .footer {
+    position: fixed;
+    bottom: 0;
+    height: 100px;
+    width: 100%;
+}
+
 #photodetail .button {
-    flex: 1 auto;
-    height: 50px;
-    padding: 10px;
+    display: inline-block;
+    box-sizing: border-box;
+    width: 50%;
+    height: 100%;
+    padding: 32px;
+    font-size: 40px;
+    opacity: .50;
+    /*http://www.colorzilla.com/gradient-editor/*/
+    background: -moz-linear-gradient(top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.65)), color-stop(100%,rgba(0,0,0,0))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%); /* IE10+ */
+    background: linear-gradient(to bottom, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%); /* W3C */
+    color: white;
 }
 
 #photodetail .backward {
-    order: 2;
-    background-color: red;
+    /*background-color: #ddd;*/
 }
 
 #photodetail .forward {
-    order: 3;
-    background-color: orange;
+ /*   background-color: #ddd;*/
     text-align: right;
 }
 
@@ -103,4 +108,8 @@ div.photodiv > img {
     width: 50px;
     padding-top: 10px;
     padding-left: 20px;
+}
+
+#header a:visited {
+    color: white;
 }
