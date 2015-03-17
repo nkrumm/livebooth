@@ -1,7 +1,11 @@
+html, body {
+    height:100%;
+    margin:0;
+    padding:0;
+}
 
 body {
     background-color: gray;
-    margin-top: 50px;
 }
 
 #photos {
@@ -33,15 +37,36 @@ div.photodiv > img {
     display: -ms-flexbox;  /* TWEENER - IE 10 */
     display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
     display: flex;         /* NEW, Spec - Firefox, Chrome, Opera */
-    -webkit-flex-flow: row nowrap;
-    flex-flow: row nowrap;
+    -webkit-flex-flow: row wrap;
+    flex-flow: row wrap;
     justify-content: center;
-    align-content: center;
-    align-items: center;
+    /*width: 90vw;*/
+    margin: auto;
+    position: relative;
 }
 
-#photodetail > div {
-    padding-top: 20px;
+#photodetail .content {
+    max-height: 90vh;
+    overflow: hidden;
+    flex: 1 100%;
+    background-color: green;
+}
+
+#photodetail .button {
+    flex: 1 auto;
+    height: 50px;
+    padding: 10px;
+}
+
+#photodetail .backward {
+    order: 2;
+    background-color: red;
+}
+
+#photodetail .forward {
+    order: 3;
+    background-color: orange;
+    text-align: right;
 }
 
 #header {

@@ -7,8 +7,12 @@ module.exports = React.createClass({
     displayName: 'PhotoView',
     mixins: [State],
     render: function(){
-  		return (<div id="photodetail">
-  			<div><img src={"/photo/" + this.getParams().id} /></div>
+  		return (
+
+  		<div id="photodetail">
+  			<div className="content"><img src={"/photo/" + this.getParams().id} width="100%"/></div>	
+			<div className="button backward">Back</div>
+			<div className="button forward">Forward</div>
   		</div>)
     },
 })
