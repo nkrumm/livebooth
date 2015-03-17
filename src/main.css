@@ -69,18 +69,24 @@ div.photodiv > img {
 #photodetail .backward {
     /*background-color: #ddd;*/
     width: 40%;
+    color: white;
+    opacity: 1;
 }
 
 #photodetail .share {
     text-align: center;
     /*background-color: #ddd;*/
     width: 20%;
+    color: white;
+    opacity: 1;
 }
 
 #photodetail .forward {
  /*   background-color: #ddd;*/
     text-align: right;
     width: 40%;
+    color: white;
+    opacity: 1;
 }
 
 #header {
