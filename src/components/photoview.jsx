@@ -14,7 +14,7 @@ module.exports = React.createClass({
 		this.transitionTo('photo', {id: parseInt(this.getParams().id) - 1});
     },
     handleShare: function(){
-    	
+
     },
     render: function(){
   		return (
@@ -22,9 +22,13 @@ module.exports = React.createClass({
   		<div id="photodetail">
   			<div className="content"><img src={"/photo/" + this.getParams().id} /></div>
   			<div className="footer">
-				<div className="button backward" onClick={this.handleBackward}>Back</div>
-				<div className="button share" onClick={this.handleShare}>Share</div>
-				<div className="button forward" onClick={this.handleForward}>Forward</div>
+				<div className="button backward" onClick={this.handleBackward}>
+					<i className="fa fa-angle-double-left fa-lg"></i> 
+					</div>
+				<div className="button share" onClick={this.handleShare}>
+					<i className="fa fa-envelope-o fa-lg"></i>
+				</div>
+				<div className="button forward" onClick={this.handleForward}><i className="fa fa-angle-double-right fa-lg"></i></div>
 			</div>
   		</div>)
     },
