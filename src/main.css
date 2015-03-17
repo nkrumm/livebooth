@@ -40,9 +40,7 @@ div.photodiv > img {
     -webkit-flex-flow: row wrap;
     flex-flow: row wrap;
     justify-content: center;
-    /*width: 90vw;*/
     margin: auto;
-    position: relative;
 }
 
 #photodetail .content {
@@ -50,6 +48,10 @@ div.photodiv > img {
     overflow: hidden;
     flex: 1 100%;
     background-color: green;
+}
+
+#photodetail .content img {
+    width: 100%;
 }
 
 #photodetail .button {
