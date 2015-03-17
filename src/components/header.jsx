@@ -9,7 +9,7 @@ module.exports = React.createClass({
   		return (
   			<div id="header">
   				<div className="left-menu">
-	  				<i className="fa fa-home"></i>
+	  				<a href="/"><i className="fa fa-home"></i></a>
 	  			</div>
 	  			<div className="title">
 	  				A+N's Photo Booth
