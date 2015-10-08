@@ -16,23 +16,27 @@ module.exports = React.createClass({
     handleShare: function(){
 
     },
-
+    handleSwipe: function(el, ev, index){
+        console.log("handleSwipe index is: " + index)
+        var dir = index == 2 ? 1 : -1
+        var newId = this.state.currentId + dir;
+        this.setState({
+            ids: this.state.ids.map(function(id){return id + dir;}),
+            currentId: newId
+        })
+        this.replaceWith('photo', {id: newId});
+    },
     componentDidMount: function(){
       this.opts = {
-        onSwipeEnd: function(){
-          var s = this.state.ids;
-          this.setState({
-              ids: s.concat([this.state.currentId + 2]),
-              currentId: this.state.currentId + 1
-          })
-        }.bind(this)
+        jumpToPage: 2,
+        onSwipeEnd: this.handleSwipe.bind(this),
       }
       this.dragend = $(this.refs.dragend.getDOMNode()).dragend(this.opts);
     },
     getInitialState: function(){
       var id = parseInt(this.getParams().id);
       return {
-        ids: [id, id + 1],
+        ids: [id - 1, id, id + 1],
         currentId: id
       }
     },
@@ -41,9 +45,8 @@ module.exports = React.createClass({
     }, 
     render: function(){
       console.log("render")
-      console.log(this.dragend)
       console.log(this.state.ids)
-      var images = this.state.ids.map(function(d){
+      var images = this.state.ids.map(function(d, ix){
         return <li key={d} className="dragend-page"><img src={"/photo/" + d} /></li>
       })
   		return (
