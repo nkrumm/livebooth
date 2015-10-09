@@ -24,12 +24,22 @@ body {
 	box-sizing: border-box;
     width: 33%;
     height: auto;
-    padding: 1%;
+    padding: 1px;
+    line-height: 0px;
 }
 
 div.photodiv > img {
 	width: 100%;
 	height: auto;
+    cursor: pointer;
+}
+
+.dragend-page {
+    height: 100% !important;
+}
+
+div.content > div > ul {
+    margin: 0px !important;
 }
 
 #photodetail .content {
