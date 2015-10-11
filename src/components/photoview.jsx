@@ -29,15 +29,33 @@ module.exports = React.createClass({
     componentDidMount: function(){
       this.opts = {
         jumpToPage: 2,
-        onSwipeEnd: this.handleSwipe.bind(this),
+        onSwipeEnd: this.handleSwipe,
+        direction: "horizontal",
+        afterInitialize: function(){$("li.dragend-page > img").show();}
+
       }
       this.dragend = $(this.refs.dragend.getDOMNode()).dragend(this.opts);
+      this.setState({firstLoad: false})
+      // var options = {
+      //   preventDefault: true
+      // };
+      // var hammertime = new Hammer($(this.refs.dragend.getDOMNode())[0], options);
+      // var swipe     = new Hammer.Swipe();
+
+      // hammertime.add(swipe);
+      // hammertime.get('pan').set({ direction: Hammer.DIRECTION_ALL });
+      // hammertime.get('swipe').set({ direction: Hammer.DIRECTION_VERTICAL })
+      // hammertime.on("swipedown", function(ev){ 
+      //     console.log(ev)
+      // }.bind(this));
+
     },
     getInitialState: function(){
       var id = parseInt(this.getParams().id);
       return {
         ids: [id - 1, id, id + 1],
-        currentId: id
+        currentId: id,
+        firstLoad: true
       }
     },
     componentDidUpdate: function(){
@@ -46,8 +64,14 @@ module.exports = React.createClass({
     render: function(){
       console.log("render")
       console.log(this.state.ids)
+      console.log("Current ID: " + this.state.currentId)
+      if (this.state.firstLoad){
+        var s = {"display": "none"}
+      } else {
+        var s = {};
+      }
       var images = this.state.ids.map(function(d, ix){
-        return <li key={d} className="dragend-page"><img src={"/photo/" + d} /></li>
+        return <li key={d} className="dragend-page"><img src={"/photo/" + d} style={s} /></li>
       })
   		return (
 
