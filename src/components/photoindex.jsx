@@ -16,9 +16,8 @@ module.exports = React.createClass({
 
 		socket.on('new photo', function(msg){
 			console.log(msg);
-			var src = "/photos/" + msg;
 			this.setState({
-				photos: [{src: src}].concat(this.state.photos)
+				photos: [{"id": msg}].concat(this.state.photos)
 			})
 		}.bind(this));
 
