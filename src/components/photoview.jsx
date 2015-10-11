@@ -7,12 +7,6 @@ var Navigation = require('react-router').Navigation;
 module.exports = React.createClass({
     displayName: 'PhotoView',
     mixins: [State, Navigation],
-    handleForward: function(){
-		this.transitionTo('photo', {id: parseInt(this.getParams().id) + 1});
-    },
-    handleBackward: function(){
-		this.transitionTo('photo', {id: parseInt(this.getParams().id) - 1});
-    },
     handleShare: function(){
 
     },
@@ -36,18 +30,6 @@ module.exports = React.createClass({
       }
       this.dragend = $(this.refs.dragend.getDOMNode()).dragend(this.opts);
       this.setState({firstLoad: false})
-      // var options = {
-      //   preventDefault: true
-      // };
-      // var hammertime = new Hammer($(this.refs.dragend.getDOMNode())[0], options);
-      // var swipe     = new Hammer.Swipe();
-
-      // hammertime.add(swipe);
-      // hammertime.get('pan').set({ direction: Hammer.DIRECTION_ALL });
-      // hammertime.get('swipe').set({ direction: Hammer.DIRECTION_VERTICAL })
-      // hammertime.on("swipedown", function(ev){ 
-      //     console.log(ev)
-      // }.bind(this));
 
     },
     getInitialState: function(){
@@ -81,15 +63,7 @@ module.exports = React.createClass({
             {images}
           </ul>
         </div>
-  			<div className="footer">
-				<div className="button backward" onClick={this.handleBackward}>
-					<i className="fa fa-angle-double-left fa-lg"></i> 
-					</div>
-				<div className="button share" onClick={this.handleShare}>
-					<i className="fa fa-envelope-o fa-lg"></i>
-				</div>
-				<div className="button forward" onClick={this.handleForward}><i className="fa fa-angle-double-right fa-lg"></i></div>
-			</div>
+  			
   		</div>)
     },
 })
