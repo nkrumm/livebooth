@@ -22,8 +22,8 @@ module.exports = React.createClass({
 			})
 		}.bind(this));
 
-        $.get("/photos/recent").done(function(data){
-            var photos = data.map(function(id, ix){return {id: id};})
+        $.get("/photos/recent").done(function(records){
+            var photos = records.map(function(r, ix){return {id: r.id};})
             this.setState({
                 photos: photos
             })
