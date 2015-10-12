@@ -45,7 +45,7 @@ div.content > div > ul {
 #photodetail .content {
     max-height: 100vh;
     overflow: hidden;
-    background-color: green;
+    background-color: black;
 }
 
 #photodetail .content img {
