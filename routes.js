@@ -27,7 +27,7 @@ module.exports = function(app, args){
 
 	app.get('/photos/recent', function(req, res) {
 		app.db.find({})
-			  .sort({id: 1})
+			  .sort({timestamp: -1})
 			  .exec(function (err, records){
 			  	res.json(records)
 			  })

@@ -3,6 +3,7 @@ var app = express();
 var flow = require("flow");
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
+var fs = require('fs');
 var chokidar = require('chokidar');
 var datastore = require('nedb')
 var path = require('path')
@@ -26,9 +27,14 @@ console.log("currentId is " + String(currentId))
 var photoWorkflow = flow.define(
 	function(in_path){
 		this.in_path = in_path // save in_path for use in next function
-		// create a thumbnail if needed and pass thumb_path to next function
 		this.basename = path.basename(in_path)
-		photos.processPhoto(in_path, this)
+		fs.stat(this.in_path, this)
+	},
+	function(err, stats){
+		// save timestamp
+		this.timestamp = stats.ctime.getTime();
+		// create a thumbnail if needed and pass thumb_path to next function
+		photos.processPhoto(this.in_path, this)
 	},
 	function(thumb_path){
 		// look for records
@@ -38,7 +44,11 @@ var photoWorkflow = flow.define(
 	function(err, records){
 		if (records.length == 0){
 			// no record exists
-			var record = {id: currentId, thumb_path: this.thumb_path}
+			var record = {
+				id: currentId,
+				thumb_path: this.thumb_path,
+				timestamp: this.timestamp
+			}
 			console.log("new record " + this.basename + " ==> " + JSON.stringify(record))
 			app.db.insert(record, this)
 			//save currentId in this context
