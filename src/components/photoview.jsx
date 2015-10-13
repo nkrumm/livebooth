@@ -12,17 +12,26 @@ module.exports = React.createClass({
     },
     handleSwipe: function(el, ev, index){
         console.log("handleSwipe index is: " + index)
-        var dir = index == 2 ? 1 : -1
-        var newId = this.state.currentId + dir;
-        this.setState({
-            ids: this.state.ids.map(function(id){return id + dir;}),
-            currentId: newId
-        })
-        this.replaceWith('photo', {id: newId});
+        var id_ix = window.photo_ids.indexOf(this.state.currentId);
+        var dir = index > this.state.ids.filter(function(x){return isNaN(x) == false}).indexOf(this.state.currentId) ? 1 : -1
+        var new_id_ix = id_ix + dir;
+        id = window.photo_ids[new_id_ix]
+        if (id !== undefined){
+          id = parseInt(id, 10)
+          var ids = [window.photo_ids[new_id_ix-1], id, window.photo_ids[new_id_ix+1]]
+          ids = ids.map(function(x){return parseInt(x, 10)});
+          this.setState({
+              ids: ids,
+              currentId: id
+          })
+          this.replaceWith('photo', {"id": id});
+        } 
+
     },
     componentDidMount: function(){
+
       this.opts = {
-        jumpToPage: 2,
+        jumpToPage: this.state.ids.indexOf(this.state.currentId) + 1,
         onSwipeEnd: this.handleSwipe,
         direction: "horizontal",
         afterInitialize: function(){$("li.dragend-page > img").show();}
@@ -33,9 +42,12 @@ module.exports = React.createClass({
 
     },
     getInitialState: function(){
-      var id = parseInt(this.getParams().id);
+      var id = parseInt(this.getParams().id)
+      var id_ix = window.photo_ids.indexOf(id)
+      var ids = [window.photo_ids[id_ix-1], id, window.photo_ids[id_ix+1]]
+      ids = ids.map(function(x){return parseInt(x, 10)});
       return {
-        ids: [id - 1, id, id + 1],
+        ids: ids,
         currentId: id,
         firstLoad: true
       }
@@ -52,7 +64,7 @@ module.exports = React.createClass({
       } else {
         var s = {};
       }
-      var images = this.state.ids.map(function(d, ix){
+      var images = this.state.ids.filter(function(x){return isNaN(x)==false}).map(function(d, ix){
         return <li key={d} className="dragend-page"><img src={"/photo/" + d} style={s} /></li>
       })
   		return (
