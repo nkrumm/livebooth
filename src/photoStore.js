@@ -44,6 +44,23 @@ var photoStore = Reflux.createStore({
   	} else {
   		return {id: null}
   	}
+  },
+  sendMMS: function(id, phonenumber){
+  	//send a photo by MMS
+  	// first ensure that it has been uploaded to S3
+  	$.get("/photo/" + id + "/status").done(function(data){
+  		if (data.s3path){
+  			//photo is uploaded, share it!
+  			$.ajax({
+				type: 'POST',
+				data: JSON.stringify({to: phonenumber}),
+		        contentType: 'application/json',
+	            url: '/photo/'+id+'/share'
+            })
+  		} else {
+  			return false
+  		}
+  	})
   }
 })
 

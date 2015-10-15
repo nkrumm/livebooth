@@ -25,6 +25,39 @@ module.exports = function(app, args){
 	  
 	});
 
+	app.get('/photo/:id/status', function(req, res) {
+		app.db.find({id : parseInt(req.params.id)}, function(err, records){
+	  	if (records.length == 1){
+	  		res.json(records[0])
+	  	} else {
+	  		res.send("no such file")
+	  	}
+	  })	  	
+	});
+
+	app.post('/photo/:id/share', function(req, res){
+		console.log(req.body)
+		app.db.find({id : parseInt(req.params.id)}, function(err, records){
+	  	if (records.length == 1){
+	  		if (records[0].uploaded){
+	  			rec = records[0]
+	  			console.log(rec)
+	  			app.twilio.messages.create({ 
+					to: req.body.to, 
+					from: "+12065677325",  
+					mediaUrl: rec.s3path,  
+				},
+				function(err, message) { console.log(err); }
+				);
+	  		} else {
+	  			res.send("no such file or image is not yet uploaded")	
+	  		}
+	  	} else {
+	  		res.send("no such file or image is not yet uploaded")
+	  	}
+	  	});
+	});
+
 	app.get('/photos/recent', function(req, res) {
 		app.db.find({})
 			  .sort({timestamp: -1})

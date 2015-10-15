@@ -15,12 +15,23 @@ var args = require('commander')
 			  .option('-d, --photo-dir [dir]', 'Directory of incoming photos to watch; default is ./', "./")
 			  .parse(process.argv);
 
+// set up POST body middleware
+var bodyParser = require('body-parser');
+app.use(bodyParser.json()); // support json encoded bodies
+app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
+
+//import routes
 require("./routes.js")(app, args)
 app.use(express.static("assets/"));
 
 //setup AWS
 aws.config.region = 'us-east-1';
 var s3bucket = new aws.S3({params: {Bucket: 'wedding-photostore'}});
+
+//setup twilio
+var accountSid = process.env.TWILIO_SID;
+var authToken = process.env.TWILIO_AUTH;
+app.twilio = require('twilio')(accountSid, authToken); 
 
 //init the storage backend for mapping paths --> photo ids
 app.db = new datastore();
