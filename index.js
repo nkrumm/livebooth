@@ -6,6 +6,7 @@ var io = require('socket.io')(http);
 var fs = require('fs');
 var chokidar = require('chokidar');
 var datastore = require('nedb')
+var aws = require('aws-sdk')
 var path = require('path')
 var photos = require('./photos.js')
 
@@ -16,6 +17,10 @@ var args = require('commander')
 
 require("./routes.js")(app, args)
 app.use(express.static("assets/"));
+
+//setup AWS
+aws.config.region = 'us-east-1';
+var s3bucket = new aws.S3({params: {Bucket: 'wedding-photostore'}});
 
 //init the storage backend for mapping paths --> photo ids
 app.db = new datastore();
@@ -63,6 +68,33 @@ var photoWorkflow = flow.define(
 	},
 	function(){
 		io.emit('new photo', this.currentId);
+		this() // go to next step
+	},
+	function(){
+		// upload to AWS s3 bucket if necessary
+		
+		var fileBuffer = fs.readFileSync(this.thumb_path);
+		var params = {
+			Key: this.basename,
+			Body: fileBuffer,
+			ACL: 'public-read'};
+
+		s3bucket.headObject({Key: this.basename}, function (err, metadata) {  
+			if (err) {  
+				// Not uploaded yet
+				console.log("Uploading " + this.basename)
+				s3bucket.upload(params, function(err, data) {
+					if (err) {
+					  console.log("Error uploading data: ", err);
+					} else {
+					  console.log("Successfully uploaded " + this.basename);
+					}
+				}.bind(this));
+			} else {  
+				//console.log("already uploaded!")
+			}
+		}.bind(this));
+		
 	}
 
 )
