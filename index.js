@@ -86,12 +86,17 @@ var photoWorkflow = flow.define(
 				s3bucket.upload(params, function(err, data) {
 					if (err) {
 					  console.log("Error uploading data: ", err);
+					  app.db.update({id: this.currentId}, {$set: {uploaded: false}}, {upsert: true})
 					} else {
+					  s3path = "https://s3.amazonaws.com/wedding-photostore/" + encodeURIComponent(this.basename)
 					  console.log("Successfully uploaded " + this.basename);
+					  app.db.update({id: this.currentId}, {$set: {uploaded: true, s3path: s3path}}, {upsert: true})
 					}
 				}.bind(this));
 			} else {  
 				//console.log("already uploaded!")
+				s3path = "https://s3.amazonaws.com/wedding-photostore/" + encodeURIComponent(this.basename)
+				app.db.update({id: this.currentId}, {$set: {uploaded: true, s3path: s3path}}, {upsert: true})
 			}
 		}.bind(this));
 		
