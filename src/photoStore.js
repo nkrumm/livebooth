@@ -5,7 +5,7 @@ var AppActions = require('./appactions.js').AppActions;
 
 var photoStore = Reflux.createStore({
   init: function() {
-    //this.listenTo(AppActions.newPhoto,this._receiveNewPhoto);
+    this.listenTo(AppActions.shareViaMMS,this.sendMMS);
 
     this.photos = []
 

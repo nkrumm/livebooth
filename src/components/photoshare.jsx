@@ -5,8 +5,8 @@ require("../main.css")
 var State = require('react-router').State;
 var Navigation = require('react-router').Navigation;
 
-var photoStore = require("../photoStore")
-
+var photoStore = require("../photoStore.js")
+var actions = require("../appactions.js").AppActions
 
 var notNull = function(x){
   return x !== null
@@ -17,7 +17,7 @@ module.exports = React.createClass({
     mixins: [State, Navigation, Reflux.ListenerMixin],
     handleShare: function(e){
       e.preventDefault()
-      photoStore.sendMMS(this.state.id, this.refs.telephone.getDOMNode().value)
+      actions.shareViaMMS(this.state.id, this.refs.telephone.getDOMNode().value)
     },
     getInitialState: function(){
       return {
