@@ -13,7 +13,6 @@ module.exports = function(app, args){
 	app.get('/photo/:id', function(req, res) {
 	  // return the photo by ID here
 	  // this is the main way the app will receive photos live.
-	  console.log(req.params.id)
 	  app.db.find({id : parseInt(req.params.id)}, function(err, records){
 	  	if (records.length == 1){
 	  		var filename = records[0].thumb_path
