@@ -6,7 +6,8 @@ var State = require('react-router').State;
 var Navigation = require('react-router').Navigation;
 
 var photoStore = require("../photoStore")
-
+const FloatingButton = require('material-ui/lib/floating-action-button');
+var ShareDialog = require("./sharedialog.jsx")
 
 var notNull = function(x){
   return x !== null
@@ -16,7 +17,7 @@ module.exports = React.createClass({
     displayName: 'PhotoView',
     mixins: [State, Navigation, Reflux.ListenerMixin],
     handleShare: function(){
-
+        this.refs.sharedialog.show()
     },
     handleSwipe: function(el, ev, index){
         var new_id = this.state.ids[index]
@@ -65,7 +66,8 @@ module.exports = React.createClass({
         ids: ids,
         currentId: id,
         currentPage: currentPage,
-        firstLoad: true
+        firstLoad: true,
+        shareDialog: false
       }
     },
     componentDidUpdate: function(){
@@ -96,7 +98,10 @@ module.exports = React.createClass({
             {images}
           </ul>
         </div>
-  			
+  			<FloatingButton style={{position: "absolute", bottom: 50, right: 75}} onClick={this.handleShare}>
+          <i className="fa fa-lg fa-share"></i>
+        </FloatingButton>
+        <ShareDialog ref="sharedialog" id={this.state.currentId}/>
   		</div>)
     },
 })
