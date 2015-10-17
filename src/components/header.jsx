@@ -4,6 +4,7 @@ require("../main.css")
 var State = require('react-router').State;
 var Navigation = require('react-router').Navigation;
 
+const FloatingButton = require('material-ui/lib/floating-action-button');
 
 module.exports = React.createClass({
     displayName: 'Header',
@@ -15,13 +16,16 @@ module.exports = React.createClass({
   		return (
   			<div id="header">
   				<div className="left-menu">
-	  				<a onClick={this.handleHome}><i className="fa fa-home"></i></a>
+	  				<FloatingButton
+		                primary={true}
+		                onClick={this.handleHome}><i className="fa fa-home fa-lg"></i></FloatingButton>
 	  			</div>
-	  			<div className="title">
-	  				A+N's Photo Booth
+	  			<div className="title">A&N's Photobooth
 	  			</div>
 	  			<div className="right-menu">
-	  				<i className="fa fa-question"></i>
+	  			<FloatingButton style={{position: "relative"}}>
+                    <i className="fa fa-lg fa-question"></i>
+            	</FloatingButton>
 	  			</div>
   			</div>)
     },

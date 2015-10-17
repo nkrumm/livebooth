@@ -63,9 +63,9 @@ module.exports = React.createClass({
             var error_msg = null
         }
         return (
-        <Dialog ref="dialog" contentStyle={{width: "33%"}}
+        <Dialog ref="dialog"
             title="Text/share this photo!"
-            actionFocus="submit" width="40%"
+            actionFocus="submit"
             actions = {[
               <FlatButton
                 label="Cancel"

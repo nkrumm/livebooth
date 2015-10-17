@@ -113,24 +113,29 @@ div.content > div > ul {
     display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
     display: flex;         /* NEW, Spec - Firefox, Chrome, Opera */
     justify-content: space-between;
-    flex-flow: row wrap;
+    /*flex-flow: row wrap;*/
 }
 
 #header > .right-menu {
     width: 50px;
-    padding-top: 10px;
-    padding-right: 20px;
+    padding-top: 0.7em;
+    padding-right: 1.5em;
     text-align: right;
 }
 
 #header > .title {
     padding: 10px;
+    text-overflow: clip;
+    white-space:nowrap;
+    font-family: "Patua One";
+    font-size: 20pt;
+    letter-spacing: 0.1em;
 }
 
 #header > .left-menu {
     width: 50px;
-    padding-top: 10px;
-    padding-left: 20px;
+    padding-top: 0.7em;
+    padding-left: 1.5em;
 }
 
 #header a:visited {

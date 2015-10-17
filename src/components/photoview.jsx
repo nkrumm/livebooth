@@ -98,7 +98,7 @@ module.exports = React.createClass({
             {images}
           </ul>
         </div>
-  			<FloatingButton style={{position: "absolute", bottom: 50, right: 75}} onClick={this.handleShare}>
+  			<FloatingButton style={{position: "absolute", bottom: "2em", right: "1.5em"}} onClick={this.handleShare}>
           <i className="fa fa-lg fa-share"></i>
         </FloatingButton>
         <ShareDialog ref="sharedialog" id={this.state.currentId}/>
