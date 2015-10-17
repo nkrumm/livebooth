@@ -22,11 +22,18 @@ module.exports = React.createClass({
     	this.listenTo(photoStore, this.onStatusChange);
     }, 
     getInitialState: function (){
+        console.log("GIS")
     	return {
     		photos: []
     	}
     },
     onStatusChange: function(){
+        // handle update from store here
+        this.setState({
+            photos: photoStore.getAllPhotos()
+        })
+    },
+    componentWillMount: function(){
         // handle update from store here
         this.setState({
             photos: photoStore.getAllPhotos()
