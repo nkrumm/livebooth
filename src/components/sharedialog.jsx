@@ -39,7 +39,7 @@ module.exports = React.createClass({
             somethingIsValid = true
         }
         if (isValidEmail(this.refs.email.getValue())){
-            //actions.shareViaEmail(this.props.id, this.refs.email.getValue())
+            actions.shareViaEmail(this.props.id, this.refs.email.getValue())
             somethingIsValid = true
         }
         if (!somethingIsValid){

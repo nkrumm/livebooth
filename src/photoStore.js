@@ -13,6 +13,7 @@ injectTapEventPlugin();
 var photoStore = Reflux.createStore({
   init: function() {
     this.listenTo(AppActions.shareViaMMS,this.sendMMS);
+    this.listenTo(AppActions.shareViaEmail,this.sendEmail);
 
     this.photos = []
 
@@ -60,7 +61,7 @@ var photoStore = Reflux.createStore({
   			//photo is uploaded, share it!
   			$.ajax({
 				type: 'POST',
-				data: JSON.stringify({to: phonenumber}),
+				data: JSON.stringify({to: phonenumber, type: "mms"}),
 		        contentType: 'application/json',
 	            url: '/photo/'+id+'/share'
             })
@@ -68,6 +69,15 @@ var photoStore = Reflux.createStore({
   			return false
   		}
   	})
+  },
+  sendEmail: function(id, email){
+	$.ajax({
+		type: 'POST',
+		data: JSON.stringify({to: email, type: "email"}),
+        contentType: 'application/json',
+        url: '/photo/'+id+'/share'
+    })
+
   }
 })
 

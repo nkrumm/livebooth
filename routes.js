@@ -41,13 +41,31 @@ module.exports = function(app, args){
 	  		if (records[0].uploaded){
 	  			rec = records[0]
 	  			console.log(rec)
-	  			app.twilio.messages.create({ 
-					to: req.body.to, 
-					from: "+12065677325",  
-					mediaUrl: rec.s3path,  
-				},
-				function(err, message) { console.log(err); }
-				);
+	  			if (req.body.type == "mms"){
+	  				console.log("sending mms to " + req.body.to)
+		  			app.twilio.messages.create({ 
+						to: req.body.to, 
+						from: "+12065677325",  
+						mediaUrl: rec.s3path,  
+					},
+					function(err, message) { console.log(err || message); }
+					);
+					res.json({status: "ok"})
+				} else if (req.body.type == "email"){
+					console.log("sending email to " + req.body.to)
+					app.email.send({
+						from:    "April & Nik <aprilandnik@gmail.com>", 
+					   	to:      req.body.to,
+					   	subject: "Photobooth photo",
+					   	text: "<3, April and Nik",
+					   	attachment: [{path: rec.thumb_path, type: "image/jpeg", name: "photobooth.jpeg"}]
+					},
+					function(err, message) { console.log(err || message); }
+					);
+					res.json({status: "ok"})
+				} else {
+					res.send("Must specify a 'type' field in POST as either 'mms' or 'email'!")
+				}
 	  		} else {
 	  			res.send("no such file or image is not yet uploaded")	
 	  		}

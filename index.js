@@ -8,6 +8,7 @@ var chokidar = require('chokidar');
 var datastore = require('nedb')
 var aws = require('aws-sdk')
 var path = require('path')
+var email = require('emailjs/email')
 var photos = require('./photos.js')
 
 var args = require('commander')
@@ -32,6 +33,15 @@ var s3bucket = new aws.S3({params: {Bucket: 'wedding-photostore'}});
 var accountSid = process.env.TWILIO_SID;
 var authToken = process.env.TWILIO_AUTH;
 app.twilio = require('twilio')(accountSid, authToken); 
+
+//setup emailks
+app.email  = email.server.connect({
+   user: process.env.EMAIL_USER,
+   password: process.env.EMAIL_PASSWORD, 
+   host: "smtp.gmail.com", 
+   ssl: true
+});
+
 
 //init the storage backend for mapping paths --> photo ids
 app.db = new datastore();
