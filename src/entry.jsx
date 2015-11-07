@@ -10,8 +10,13 @@ var DefaultRoute = Router.DefaultRoute;
 var Link = Router.Link;
 var Route = Router.Route;
 var RouteHandler = Router.RouteHandler;
+var Navigation = require('react-router').Navigation;
+
+var HOME_SCREEN_TIMEOUT = 180 // seconds, set to null if no timeout
+var home_screen_timout_id;
 
 var App = React.createClass({
+  mixins: [Navigation],
 	render: function () {
     	return (
     		<div>
@@ -19,7 +24,18 @@ var App = React.createClass({
     			<RouteHandler />
     		</div>
     	)
-	}
+	},
+  getInitialState() {
+    return {
+      home_screen_timout_id: 0
+    }
+  },
+  componentDidUpdate: function () {
+    if (HOME_SCREEN_TIMEOUT != null){
+      window.clearTimeout(home_screen_timout_id)
+      home_screen_timout_id = setTimeout(function() {this.replaceWith('index')}.bind(this), HOME_SCREEN_TIMEOUT * 1000)
+    }
+  }
 })
 
 
