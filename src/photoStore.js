@@ -32,8 +32,15 @@ var photoStore = Reflux.createStore({
     }.bind(this));
 
   },
-  getAllPhotos: function(){
-  	return this.photos
+  getAllPhotos: function(start_id, limit){
+    if (this.photos.length > 0){
+      start_id = start_id || this.photos[0].id
+      limit = limit || this.photos.length
+      start_offset = this.photos.map(function(d){return d.id}).indexOf(start_id)
+    	return this.photos.slice(start_offset, start_offset+limit)
+    } else {
+      return []
+    }
   },
   getNextPhoto: function(id){
   	// return next photo
