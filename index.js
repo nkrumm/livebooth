@@ -62,9 +62,10 @@ var photoWorkflow = flow.define(
 		// create a thumbnail if needed and pass thumb_path to next function
 		photos.processPhoto(this.in_path, this)
 	},
-	function(thumb_path){
+	function(thumb_path, full_path){
 		// look for records
 		this.thumb_path = thumb_path
+		this.full_path = full_path
 		app.db.find({basename: this.basename}, this)
 	},
 	function(err, records){
@@ -73,6 +74,7 @@ var photoWorkflow = flow.define(
 			var record = {
 				id: currentId,
 				thumb_path: this.thumb_path,
+				full_path: this.full_path,
 				timestamp: this.timestamp
 			}
 			console.log("new record " + this.basename + " ==> " + JSON.stringify(record))

@@ -15,6 +15,19 @@ module.exports = function(app, args){
 	  // this is the main way the app will receive photos live.
 	  app.db.find({id : parseInt(req.params.id)}, function(err, records){
 	  	if (records.length == 1){
+	  		var filename = records[0].full_path
+	  		res.sendFile(__dirname + "/" + filename);		
+	  	} else {
+	  		res.send("no such file")
+	  	}
+	  })
+	  
+	});
+
+	app.get('/thumbnail/:id', function(req, res) {
+	  // return the thumbnail by ID here
+	  app.db.find({id : parseInt(req.params.id)}, function(err, records){
+	  	if (records.length == 1){
 	  		var filename = records[0].thumb_path
 	  		res.sendFile(__dirname + "/" + filename);		
 	  	} else {

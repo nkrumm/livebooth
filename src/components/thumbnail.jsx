@@ -10,6 +10,6 @@ module.exports = React.createClass({
     	this.transitionTo('photo', {id: this.props.id});
     },
     render: function(){
-        return (<div className="photodiv" onClick={this.handleClick}><img src={"/photo/" + this.props.id} /></div>)
+        return (<div className="photodiv" onClick={this.handleClick}><img src={"/thumbnail/" + this.props.id} /></div>)
     }
 })
