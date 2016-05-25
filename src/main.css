@@ -175,3 +175,8 @@ div.content > div > ul {
 #header a:visited {
     color: white;
 }
+
+#helpdialog > * {
+    color: black;
+    text-align: left;
+}
