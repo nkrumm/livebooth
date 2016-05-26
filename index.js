@@ -33,6 +33,7 @@ var s3bucket = new aws.S3({params: {Bucket: 'wedding-photostore'}});
 var accountSid = process.env.TWILIO_SID;
 var authToken = process.env.TWILIO_AUTH;
 app.twilio = require('twilio')(accountSid, authToken); 
+app.twilio.my_number = process.env.TWILIO_NUMBER; // "+1##########" format
 
 //setup emailks
 app.email  = email.server.connect({

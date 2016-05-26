@@ -58,7 +58,7 @@ module.exports = function(app, args){
 	  				console.log("sending mms to " + req.body.to)
 		  			app.twilio.messages.create({ 
 						to: req.body.to, 
-						from: "+12065677325",  
+						from: app.twilio.my_number,
 						mediaUrl: rec.s3path,  
 					},
 					function(err, message) { console.log(err || message); }
