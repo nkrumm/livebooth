@@ -71,7 +71,7 @@ module.exports = function(app, args){
 					   	to:      req.body.to,
 					   	subject: "Photobooth photo",
 					   	text: "<3, April and Nik",
-					   	attachment: [{path: rec.thumb_path, type: "image/jpeg", name: "photobooth.jpeg"}]
+					   	attachment: [{path: rec.full_path, type: "image/jpeg", name: "photobooth.jpeg"}]
 					},
 					function(err, message) { console.log(err || message); }
 					);
